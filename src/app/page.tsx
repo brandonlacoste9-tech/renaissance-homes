@@ -1,69 +1,70 @@
-import Image from "next/image";
+import { Award, Leaf, MapPin, Shield } from "lucide-react";
+import { Cta } from "@/components/chrome";
+import { FeaturedGrid, QuoteSlider } from "@/components/cards";
+import { HeroMedia } from "@/components/hero-media";
 
-export default function Home() {
+const DIFFERENCE = [
+  {
+    icon: MapPin,
+    title: "Local since 1984",
+    body: "Lake Oswego studio. Custom work from North Portland to Salem, the Gorge to wine country.",
+  },
+  {
+    icon: Shield,
+    title: "Building standards",
+    body: "In-house plan design, a construction manager, and a quality assurance manager through warranty.",
+  },
+  {
+    icon: Leaf,
+    title: "ENERGY STAR",
+    body: "Printed as the largest builder of ENERGY STAR certified homes in Oregon. Green building is part of the process.",
+  },
+  {
+    icon: Award,
+    title: "Street of Dreams",
+    body: "Most awarded builder in NW Natural Street of Dreams history. 54 awards, including 9 Best of Show.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main>
+      <section className="relative min-h-[88vh] overflow-hidden text-cream">
+        <HeroMedia />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/45 to-ink/20" />
+        <div className="relative mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-end px-5 pb-16 pt-32">
+          <p className="text-[11px] tracking-[0.28em] uppercase text-gold">Lake Oswego · CCB 49955</p>
+          <h1 className="serif mt-4 max-w-[16ch] text-5xl leading-[0.95] md:text-7xl">
+            The Best Built Homes Are Renaissance Homes
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-cream/80">
+            Custom luxury, move-in ready inventory, and an in-house Design Studio. Fixed upfront pricing. Team under one roof.
           </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Cta href="/custom-homes">Explore Custom Homes</Cta>
+            <Cta href="/available-homes" light>
+              View Available Inventory
+            </Cta>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-20">
+        <p className="text-[11px] tracking-[0.2em] uppercase text-gold">The Renaissance Difference</p>
+        <h2 className="serif mt-3 max-w-[16ch] text-4xl md:text-5xl">Decades of craft, under one roof</h2>
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {DIFFERENCE.map((item) => (
+            <article key={item.title} className="border border-line bg-white p-6 transition hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(28,25,22,0.08)]">
+              <item.icon className="text-gold" size={22} />
+              <h3 className="serif mt-4 text-2xl">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-mute">{item.body}</p>
+            </article>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      <FeaturedGrid />
+      <QuoteSlider />
+    </main>
   );
 }
